@@ -1,0 +1,1 @@
+<a href="?Page=dashboard&Cadastro_curso">Clica aqui</a>
