@@ -1,28 +1,4 @@
-<?php
- require_once 'controllers/index.controller.php'; ?>
-<?php $IndexController = new IndexController; ?>
-<?php require_once '../vendor/autoload.php'; ?>
-<?php require_once 'classes/connection.php';?>
-<?php $Connection = new DBConnection?>
-<?php
-try {
-    $path = dirname(__FILE__, 2);
-    $dotenv = Dotenv\Dotenv::createImmutable($path);
-    $dotenv->load();
-} catch (Throwable $th) { ?>
-    <div class="alert alert-danger" role="alert"><?= 'Erro no ENV: ' . $th ?></div>
-<?php } ?>
-
-<?php 
-if (isset($_GET['Cadastro_curso'])) {
-require 'controllers/daos/cadastro_cliente.dao.php';
-$ClienteDAO = new ClienteDAO;
-if ($ClienteDAO->INSERT('teste', 'teste')){
-    echo 'inseriu';
-}
-}
-?>
-
+<?php require 'pages/components/header_php.php'; ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -45,6 +21,10 @@ if ($ClienteDAO->INSERT('teste', 'teste')){
 
         if (file_exists($path)) {
             require_once 'pages/' . $_GET['Page'] . '.php';
+        }
+        
+        if ($_GET['Page'] == 'dashboard') {
+            print("<pre>" . print_r($array_usuarios, true) . "</pre>");
         }
     } catch (Throwable $th) {
     }

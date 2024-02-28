@@ -8,7 +8,7 @@
 
     <ul class="nav nav-pills">
         <li class="nav-item"><a href="?Page=dashboard" class="nav-link <?= isset($_GET['Page']) && $_GET['Page'] == 'dashboard' ? 'active' : '' ?>" aria-current="page">Painel</a></li>
-        <li class="nav-item"><a href="?Page=cadastrar.curso" class="nav-link <?= isset($_GET['Page']) && $_GET['Page'] == 'cadastrar.curso' ? 'active' : '' ?>">Adicionar Curso</a></li>
+        <li class="nav-item"><a href="?Page=cadastrar" class="nav-link <?= isset($_GET['Page']) && $_GET['Page'] == 'cadastrar' ? 'active' : '' ?>">Adicionar Curso</a></li>
         <li class="nav-item"><a href="?Page=logout" class="nav-link <?= isset($_GET['Page']) && $_GET['Page'] == 'logout' ? 'active' : '' ?>">Sair</a></li>
     </ul>
 </header>

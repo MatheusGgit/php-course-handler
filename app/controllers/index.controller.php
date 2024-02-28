@@ -1,5 +1,4 @@
 <?php
-require_once 'controller.php';
 class IndexController
 {
     private PDO $PDO;
@@ -17,7 +16,8 @@ class IndexController
                 'id INTEGER PRIMARY KEY AUTOINCREMENT',
                 'nome TEXT',
                 'link TEXT',
-                'id_usuario INTEGER FOREIGN KEY (id) REFERENCES usuarios(id)'
+                'id_usuario INTEGER',
+                'FOREIGN KEY (id_usuario) REFERENCES usuarios(id)'
             ]
         ]);
     }
@@ -38,14 +38,24 @@ class IndexController
                     $tabelas_sql .= ',';
                 }
             }
-            $stmt = $this->PDO->prepare("SELECT name FROM sqlite_master WHERE type='table' AND name IN ({$tabelas_sql})");
+            $sql = "SELECT name FROM sqlite_master WHERE type='table' AND name IN ($tabelas_sql)";
+            $stmt = $this->PDO->prepare($sql);
             $stmt->execute();
+            if ($stmt->rowCount() <= 0) {
+                throw new Exception('create_table');
+            }
         } catch (Throwable $th) {
             foreach ($tabelas as $key => $value) {
                 $sql = 'CREATE TABLE IF NOT EXISTS ' . $key . '(';
-                foreach ($value as $coluna) {
-                    $sql .= $coluna . ';';
+
+                $lastKey = end(array_keys($value));
+                foreach ($value as $colunaKey => $coluna) {
+                    $sql .= $coluna;
+                    if ($colunaKey !== $lastKey) {
+                        $sql .= ',';
+                    }
                 }
+
                 $sql .= ')';
                 $stmt = $this->PDO->prepare($sql);
                 $stmt->execute();
@@ -62,5 +72,9 @@ class IndexController
         if (!file_exists(__DIR__ . '/../database/banco_de_dados.db')) {
             file_put_contents(__DIR__ . '/../database/banco_de_dados.db', '');
         }
+    }
+
+    public function ShowBootstrapAlert(string $class, string $message){
+        return '<div class="alert alert-'.$class.'" role="alert">'.$message.'</div>';;
     }
 }

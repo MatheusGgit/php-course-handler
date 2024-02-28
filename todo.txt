@@ -1,3 +1,4 @@
-Terminar todas as daos
 Decidir os campos das tabelas
 Arrumar quaisquer erros de chamada
+
+ENCRIPTA E DECRIPTA SENHA
