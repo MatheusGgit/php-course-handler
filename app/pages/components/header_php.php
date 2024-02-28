@@ -1,6 +1,6 @@
 <?php
 global $ROOT_PATH;
-require_once 'classes/connection.php';
+require_once 'database/connection.php';
 require_once 'controllers/index.controller.php';
 require_once '../vendor/autoload.php';
 require 'controllers/daos/usuarios.dao.php';
