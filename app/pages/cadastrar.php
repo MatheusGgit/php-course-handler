@@ -1,7 +1,7 @@
 <?php
 try {
-    var_dump(file_exists(''));
-    require_once  __DIR__ . '\controllers\daos\cursos.dao.php';
+    global $ROOT_PATH;
+    require_once $ROOT_PATH.'/controllers/daos/cursos.dao.php';
     $CursoDAO = new CursoDAO;
 
     require_once 'components/cadastro_cursos/logica.php';

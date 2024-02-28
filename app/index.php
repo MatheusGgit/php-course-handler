@@ -1,4 +1,5 @@
 <?php require 'pages/components/header_php.php'; ?>
+<?php $ROOT_PATH = dirname(__DIR__ . '/app'); ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -11,24 +12,22 @@
 </head>
 
 <body>
-    <?php
-    require_once 'pages/components/header.php';
-    $path = 'pages/' . $_GET['Page'] . '.php';
-    try {
-        if (!isset($_GET['Page'])) {
-            header('Location: index.php?Page=dashboard');
-        }
+    <?php require_once 'pages/components/header.php'; ?>
+    <div class="p-3">
+        <?php $path = 'pages/' . $_GET['Page'] . '.php';
+        try {
+            if (!isset($_GET['Page'])) {
+                header('Location: index.php?Page=dashboard');
+            }
 
-        if (file_exists($path)) {
-            require_once 'pages/' . $_GET['Page'] . '.php';
+            if (file_exists($path)) {
+                require_once 'pages/' . $_GET['Page'] . '.php';
+            }
+        } catch (Throwable $th) {
+            require 'pages/error_page.php';
         }
-        
-        if ($_GET['Page'] == 'dashboard') {
-            print("<pre>" . print_r($array_usuarios, true) . "</pre>");
-        }
-    } catch (Throwable $th) {
-    }
-    ?>
+        ?>
+    </div>
 </body>
 
 </html>

@@ -39,9 +39,10 @@ class CursoDAO
         try {
             global $PDO;
             $stmt = $PDO->prepare("INSERT INTO cursos (nome, link, id_usuario) VALUES (:nome, :link, :id_usuario)");
-            $stmt->execute(":nome", $nome);
-            $stmt->execute(":link", $link);
-            $stmt->execute(":id_usuario", $id_usuario);
+            $stmt->bindParam(":nome", $nome);
+            $stmt->bindParam(":link", $link);
+            $stmt->bindParam(":id_usuario", $id_usuario);
+            $stmt->execute();
             return true;
         } catch (Throwable $th) {
             throw new Exception($th->getMessage());
